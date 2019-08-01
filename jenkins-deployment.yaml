@@ -9,6 +9,9 @@ spec:
       labels:
         app: jenkins-master
     spec:
+      securityContext:
+        fsGroup: 1000 
+        runAsUser: 0
       containers:
        - name: jenkins-leader
         # image: phanikumary1995/jenkins-oracle-jdk8
