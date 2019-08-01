@@ -36,7 +36,8 @@ spec:
            path: /var/run/docker.sock
        - name: persistent-storage
          persistentVolumeClaim:
-           claimName: ebs-claim
+  #         claimName: ebs-claim
+           claimName: jenkins-pv-claim
 
     #  nodeSelector:
      #   server: node2
