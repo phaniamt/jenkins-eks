@@ -11,7 +11,8 @@ spec:
     spec:
       containers:
        - name: jenkins-leader
-         image: phanikumary1995/jenkins-oracle-jdk8
+        # image: phanikumary1995/jenkins-oracle-jdk8
+         image: jenkins/jenkins:lts
          volumeMounts:
           - name: persistent-storage
             mountPath: /var/jenkins_home
