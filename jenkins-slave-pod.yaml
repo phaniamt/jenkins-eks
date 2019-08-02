@@ -1,0 +1,67 @@
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations: {}
+  labels:
+    jenkins: "slave"
+    jenkins/autoscale: "true"
+  name: "k8s-slave-1p4j4"
+spec:
+  containers:
+  - args:
+    - "cat"
+    command:
+    - "/bin/sh"
+    - "-c"
+    env:
+    - name: "JENKINS_SECRET"
+      value: "********"
+    - name: "JENKINS_TUNNEL"
+      value: "jenkins-master-svc:50000"
+    - name: "JENKINS_AGENT_NAME"
+      value: "k8s-slave-1p4j4"
+    - name: "JENKINS_NAME"
+      value: "k8s-slave-1p4j4"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/"
+    - name: "JENKINS_URL"
+      value: "http://jenkins-master-svc:8080/"
+    image: "jenkins/jnlp-slave"
+    imagePullPolicy: "Always"
+    name: "slave"
+    resources:
+      limits: {}
+      requests: {}
+    securityContext:
+      privileged: false
+    tty: true
+    volumeMounts:
+    - mountPath: "/home/jenkins/"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/"
+  - env:
+    - name: "JENKINS_SECRET"
+      value: "********"
+    - name: "JENKINS_TUNNEL"
+      value: "jenkins-master-svc:50000"
+    - name: "JENKINS_AGENT_NAME"
+      value: "k8s-slave-1p4j4"
+    - name: "JENKINS_NAME"
+      value: "k8s-slave-1p4j4"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/agent"
+    - name: "JENKINS_URL"
+      value: "http://jenkins-master-svc:8080/"
+    image: "jenkins/jnlp-slave:alpine"
+    name: "jnlp"
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  nodeSelector: {}
+  restartPolicy: "Never"
+  volumes:
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
