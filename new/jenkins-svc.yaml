@@ -4,7 +4,7 @@ metadata:
   name: jenkins-master-svc
   labels:
     app: jenkins-master
-  namespace: kube-system
+#  namespace: kube-system
 spec:
 #  type: NodePort
   ports:
