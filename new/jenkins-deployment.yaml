@@ -4,7 +4,7 @@ metadata:
   name: jenkins-deployment
   labels:
     app: jenkins-master
-  namespace: kube-system
+#  namespace: kube-system
 spec:
   replicas: 1
   selector:
